@@ -1,0 +1,95 @@
+/nfc-attendance-system
+│
+├── /src
+│   ├── /assets
+│   ├── /components
+│   ├── /views
+│   │   ├── /auth
+│   │   │   ├── Login.vue
+│   │   │   ├── Register.vue (Admin-only)
+│   │   │
+│   │   ├── /student
+│   │   ├── /admin
+│   │   ├── /teacher
+│   │
+│   ├── /router
+│   │   └── index.js
+│   ├── /store
+│   │   ├── index.js  (for managing authentication state)
+│   ├── /styles
+│   ├── /utils
+│   └── App.vue
+└── package.json
+
+
+
+
+
+
+
+
+
+-------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+/nfc-attendance-system
+│
+├── /public
+│   ├── index.html
+│   └── ... (other public assets like favicon, etc.)
+│
+├── /src
+│   ├── /assets
+│   │   └── ... (images, styles, icons, etc.)
+│   │
+│   ├── /components
+│   │   ├── /common
+│   │   │   └── Header.vue
+│   │   │   └── Footer.vue
+│   │   │   └── Sidebar.vue (if you want to use side navigation)
+│   │   └── ... (reusable components for all roles)
+│   │
+│   ├── /views
+│   │   ├── /student
+│   │   │   ├── Dashboard.vue
+│   │   │   ├── Profile.vue
+│   │   │   ├── AttendanceMonitoring.vue
+│   │   │   └── ... (other student-specific views)
+│   │   │
+│   │   ├── /admin
+│   │   │   ├── Dashboard.vue
+│   │   │   ├── Profile.vue
+│   │   │   ├── ManageUsers.vue
+│   │   │   ├── AttendanceManagement.vue
+│   │   │   └── ... (other admin-specific views)
+│   │   │
+│   │   ├── /teacher
+│   │   │   ├── Dashboard.vue
+│   │   │   ├── Profile.vue
+│   │   │   ├── ClassManagement.vue
+│   │   │   ├── AttendanceMonitoring.vue
+│   │   │   └── ... (other teacher-specific views)
+│   │
+│   ├── /router
+│   │   ├── index.js  (Routing configuration for all roles)
+│   │
+│   ├── /store
+│   │   ├── index.js  (State management for roles, e.g., Vuex store if needed)
+│   │
+│   ├── /styles
+│   │   ├── main.scss  (Global styles, CSS resets, etc.)
+│   │   └── ... (Role-specific styles, e.g., student, admin, teacher styles)
+│   │
+│   ├── /utils
+│   │   └── nfcUtils.js (Helper functions for NFC handling, if needed)
+│   │
+│   ├── App.vue        (Main application wrapper component)
+│   └── main.js        (Vue entry point, where Vue app is initialized)
+│
+└── package.json

@@ -1,0 +1,47 @@
+import { createRouter, createWebHistory } from 'vue-router';
+
+// Student views
+import StudentDashboard from '../views/student/Dashboard.vue';
+import StudentProfile from '../views/student/Profile.vue';
+import AttendanceMonitoringStudent from '../views/student/AttendanceMonitoring.vue';
+
+// Admin views
+import AdminDashboard from '../views/admin/Dashboard.vue';
+import AdminProfile from '../views/admin/Profile.vue';
+import ManageUsers from '../views/admin/ManageUsers.vue';
+import AttendanceManagement from '../views/admin/AttendanceManagement.vue';
+
+// Teacher views
+import TeacherDashboard from '../views/teacher/Dashboard.vue';
+import TeacherProfile from '../views/teacher/Profile.vue';
+import ClassManagement from '../views/teacher/ClassManagement.vue';
+import AttendanceMonitoringTeacher from '../views/teacher/AttendanceMonitoring.vue';
+
+const routes = [
+  // Student Routes
+  { path: '/student', component: StudentDashboard },
+  { path: '/student/profile', component: StudentProfile },
+  { path: '/student/attendance', component: AttendanceMonitoringStudent },
+
+  // Admin Routes
+  { path: '/admin', component: AdminDashboard },
+  { path: '/admin/profile', component: AdminProfile },
+  { path: '/admin/manage-users', component: ManageUsers },
+  { path: '/admin/attendance', component: AttendanceManagement },
+
+  // Teacher Routes
+  { path: '/teacher', component: TeacherDashboard },
+  { path: '/teacher/profile', component: TeacherProfile },
+  { path: '/teacher/class-management', component: ClassManagement },
+  { path: '/teacher/attendance', component: AttendanceMonitoringTeacher },
+
+  // Default route
+  { path: '/', redirect: '/student' }  // Default to the student dashboard (or other default)
+];
+
+const router = createRouter({
+  history: createWebHistory(process.env.BASE_URL),
+  routes
+});
+
+export default router;
