@@ -134,7 +134,7 @@ export default {
         },
       ],
       calendarDays: this.generateCalendar(1, 2025),
-      weekDays: ["S", "M", "T", "W", "T", "F", "S"],
+      weekDays: ["S", "M", "T", "W", "TH", "F", "ST"],
     };
   },
   methods: {
