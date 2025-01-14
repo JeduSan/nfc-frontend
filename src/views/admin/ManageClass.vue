@@ -1,5 +1,5 @@
 <template>
-    <div class="manage-users">
+    <div class="manage-class">
       <AdminSidebar />
       <div class="admin-content">
         <AdminHeader />
@@ -24,7 +24,7 @@
   </script>
   
   <style scoped>
-  .manage-users {
+  .manage-class {
     display: flex;
   }
   

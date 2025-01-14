@@ -7,8 +7,8 @@
             Dashboard
           </router-link>
         </li>
-        <li class="menu-item" :class="{ active: $route.path === '/admin/manage-users' }">
-          <router-link to="/admin/manage-users" exact-active-class="active-link">
+        <li class="menu-item" :class="{ active: $route.path === '/admin/manage-class' }">
+          <router-link to="/admin/manage-class" exact-active-class="active-link">
             <i class="fas fa-users icon"></i>
             Manage Class
           </router-link>
