@@ -56,8 +56,15 @@
           </div>
         </section>
 
-        <section>
-
+        <section class="chart-section">
+          <div class="chart-item">
+            <h3>Event Attendance</h3>
+            <BarChart :data="eventAttendanceData" :options="chartOptions" />
+          </div>
+          <div class="chart-item">
+            <h3>Year Level Attendance</h3>
+            <LineChart :data="yearLevelAttendanceData" :options="chartOptions" />
+          </div>
         </section>
 
       </div>
@@ -68,6 +75,11 @@
 <script>
 import AdminSidebar from "@/components/AdminSidebar.vue";
 import AdminHeader from "@/components/AdminHeader.vue";
+import { Bar, Line } from "vue-chartjs";
+import { Chart as ChartJS, Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement } from "chart.js";
+
+// Registering Chart.js components globally
+ChartJS.register(Title, Tooltip, Legend, BarElement, CategoryScale, LinearScale, PointElement, LineElement);
 
 export default {
   name: "AdminDashboard",
@@ -79,51 +91,128 @@ export default {
           details: { name: "Enverga Foundation", time: "7:00 am - 4:00 pm" },
         },
         {
-          date: { month: "Jan", day: 21 },
+          date: { month: "Jan", day: 22 },
           details: { name: "Enverga Foundation", time: "7:00 am - 4:00 pm" },
         },
         {
-          date: { month: "Jan", day: 21 },
+          date: { month: "Jan", day: 23 },
           details: { name: "Enverga Foundation", time: "7:00 am - 4:00 pm" },
         },
       ],
       calendarDays: this.generateCalendar(1, 2025),
       weekDays: ["S", "M", "T", "W", "TH", "F", "ST"],
-    }
+      
+      // Bar chart data: Attendance per year level per event
+      eventAttendanceData: {
+        labels: ['Event 1', 'Event 2', 'Event 3', 'Event 4', 'Event 5', 'Event 6', 'Event 7', 'Event 8', 'Event 9' ], // Event labels
+        datasets: [
+          {
+            label: '1st Year',
+            backgroundColor: '#D02E1C', // Red for Freshmen
+            data: [65, 75, 60, 56, 79, 20, 95, 88, 102], // Attendance data for Freshmen
+            barThickness: 10,  // controls individual bar width
+          },
+          {
+            label: '2nd Year',
+            backgroundColor: '#3B82F6', // Blue for Sophomores
+            data: [60, 80, 65, 34, 89, 49, 101, 121, 78], // Attendance data for Sophomores
+            barThickness: 10,
+          },
+          {
+            label: '3rd Year',
+            backgroundColor: '#10B981', // Green for Juniors
+            data: [70, 85, 40, 78, 95, 36, 123, 88, 81], // Attendance data for Juniors
+            barThickness: 10,
+          },
+          {
+            label: '4th Year',
+            backgroundColor: '#F59E0B', // Yellow for Seniors
+            data: [81, 94, 42, 45, 95, 36, 65, 76, 83], // Attendance data for Seniors
+            barThickness: 10,
+          },
+        ],
+      },
+      
+      // Example months with total attendance data
+      yearLevelAttendanceData: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June'], // Months
+        datasets: [
+          {
+            label: 'All CITHM Students',
+            borderColor: '#D02E1C', // Red for Freshmen
+            data: [80, 93, 89, 113, 109, 145], // Total attendance for Freshmen in January (example: sum of attendance from events)
+            fill: false,
+            tension: 0.4,
+            borderWidth: 2,
+          },
+        ],
+      },
 
+      chartOptions: {
+        responsive: true,
+        scales: {
+          x: {
+            beginAtZero: true,
+            categoryPercentage: 0.8,  // Adjust this value to control the width of the category space
+          },
+          y: {
+            beginAtZero: true,
+            max: 200, // Max Y value (percentage)
+          },
+        },
+        plugins: {
+          legend: {
+            position: 'top',
+            labels: {
+              font: {
+                size: 12,
+              },
+            },
+          },
+        },
+        layout: {
+          padding: {
+            top: 20,
+          },
+        },
+        barPercentage: 0.7,  // Controls space between bars (lower is more space)
+      },
+    };
   },
+
   methods: {
     generateCalendar(month, year) {
       const firstDayOfMonth = new Date(year, month - 1, 1);
       const lastDayOfMonth = new Date(year, month, 0);
-
       const firstDayOfWeek = firstDayOfMonth.getDay();
       const totalDaysInMonth = lastDayOfMonth.getDate();
-
       const days = [];
-
       for (let i = 0; i < firstDayOfWeek; i++) {
         days.push(null);
       }
-
       for (let day = 1; day <= totalDaysInMonth; day++) {
         days.push(day);
       }
-
       return days;
     },
+
     hasEvent(day) {
       return this.events.some((event) => event.date.day === day);
     },
   },
+
   components: {
     AdminSidebar,
     AdminHeader,
+    BarChart: Bar,
+    LineChart: Line,
   },
 };
 </script>
 
+
 <style scoped>
+
 .admin-dashboard {
   display: flex;
 }
@@ -140,10 +229,11 @@ export default {
   padding-top: 0px;
 }
 
-.events-section {
+.events-section{
   display: flex;
   justify-content: space-between;
   margin-top: 5px;
+  margin-bottom: 20px;
   gap: 5px;
 }
 
@@ -151,7 +241,7 @@ export default {
   flex: 1;
 }
 
-.upcoming-events {
+.upcoming-events{
   background: white;
   border-radius: 8px;
   padding: 10px;
@@ -306,4 +396,28 @@ export default {
   background: #D02E1C;
   color: white;
 }
+.chart-section {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.chart-item {
+  flex: 1;
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.chart-item h3 {
+  font-size: 16px;
+  font-weight: bold;
+  color: #D02E1C;
+  margin-bottom: 15px;
+}
+
+
+
 </style>
