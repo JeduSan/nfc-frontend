@@ -7,6 +7,8 @@ import ManageClass from '../views/admin/ManageClass.vue';
 import TeacherDashboard from '../views/teacher/Dashboard.vue';  
 import ManageTeacher from '../views/admin/ManageTeacher.vue';
 import ManageStudent from '../views/admin/ManageStudent.vue';
+import ManageEvents from '../views/admin/ManageEvents.vue';
+import Analytics from '../views/admin/Analytics.vue';
  
 
 
@@ -23,6 +25,8 @@ const routes = [
   { path: '/admin/manage-class', component: ManageClass, meta: { requiresRole: 'admin' } },
   { path: '/admin/manage-teacher', component: ManageTeacher, meta: { requiresRole: 'admin' } },
   { path: '/admin/manage-student', component: ManageStudent, meta: { requiresRole: 'admin' } },
+  { path: '/admin/manage-events', component: ManageEvents, meta: { requiresRole: 'admin' } },
+  { path: '/admin/analytics', component: Analytics, meta: { requiresRole: 'admin' } },
 
   // Teacher routes
   { path: '/teacher', component: TeacherDashboard, meta: { requiresRole: 'teacher' } },
