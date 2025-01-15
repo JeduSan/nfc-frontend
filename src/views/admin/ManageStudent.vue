@@ -1,15 +1,15 @@
 <template>
-  <div class="manage-class">
+  <div class="manage-student">
     <AdminSidebar />
     <div class="page-content">
       <AdminHeader />
       <div class="manage-body">
         <div class="header">
-          <h1>Manage Class</h1>
-          <button class="add-class-btn">+ Add Class</button>
+          <h1>Manage Student</h1>
+          <button class="add-student-btn">+ Add Student</button>
         </div>
 
-        <section class="class-list">
+        <section class="student-list">
           <!-- Search and Filter -->
           <div class="controls">
             <div class="search-bar">
@@ -33,22 +33,13 @@
                 <th>Class Name</th>
                 <th>Teacher</th>
                 <th>Class List</th>
-                <th>Actions</th>
               </tr>
             </thead>
             <tbody>
               <tr v-for="(classItem, index) in filteredClasses" :key="index">
                 <td>{{ classItem.className }}</td>
                 <td>{{ classItem.teacher }}</td>
-                <td><button class="viewclass-button">View Class List</button></td>
-                <td>
-                  <button class="edit-button">
-                    <i class="fas fa-edit"></i>
-                  </button>
-                  <button class="delete-button">
-                    <i class="fas fa-trash-alt"></i>
-                  </button>
-                </td>
+                <td>{{ classItem.classList }}</td>
               </tr>
             </tbody>
           </table>
@@ -75,11 +66,11 @@ export default {
       searchQuery: '',
       selectedMonth: '',
       classes: [
-        { className: 'Math 101', teacher: 'Mr. Smith' },
-        { className: 'Science 202', teacher: 'Ms. Johnson' },
-        { className: 'History 303', teacher: 'Dr. Brown' },
-        { className: 'Art 404', teacher: 'Mrs. Davis' },
-        { className: 'Music 505', teacher: 'Mr. Wilson' },
+        { className: 'Math 101', teacher: 'Mr. Smith', classList: '20 Students' },
+        { className: 'Science 202', teacher: 'Ms. Johnson', classList: '25 Students' },
+        { className: 'History 303', teacher: 'Dr. Brown', classList: '18 Students' },
+        { className: 'Art 404', teacher: 'Mrs. Davis', classList: '22 Students' },
+        { className: 'Music 505', teacher: 'Mr. Wilson', classList: '15 Students' },
       ],
     };
   },
@@ -96,7 +87,7 @@ export default {
 </script>
 
 <style scoped>
-.manage-class {
+.manage-student {
   display: flex;
 }
 
@@ -132,7 +123,7 @@ export default {
   -webkit-text-fill-color: transparent;
 }
 
-.add-class-btn {
+.add-student-btn {
   background: linear-gradient(180deg, rgba(208, 46, 28, 1) 0%, rgba(121, 30, 30, 1) 100%);
   color: #fff;
   border: none;
@@ -141,7 +132,7 @@ export default {
   border-radius: 15px;
 }
 
-.class-list {
+.student-list {
 
   display: flex;
   justify-content: space-between;
@@ -222,6 +213,7 @@ export default {
   box-shadow: 0;
 }
 
+
 .class-table thead tr:first-child th:first-child {
   border-top-left-radius: 10px;
   border-bottom-left-radius: 10px;
@@ -247,30 +239,5 @@ export default {
   padding-top: 8px;
   padding-bottom: 8px;
   color: #fff;
-}
-
-.edit-button,
-.delete-button {
-  background-color: #fff;
-  border: none;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-.viewclass-button {
-  border: none;
-  cursor: pointer;
-  font-size: 16px;
-  padding:0%;
-  background-color: #fff;
-  color: #007bff;
-}
-
-.edit-button {
-  color: #08e237;
-}
-
-.delete-button {
-  color: #dc3545;
 }
 </style>
