@@ -5,6 +5,8 @@ import AttendanceMonitoring from '../views/student/AttendanceMonitoring.vue';
 import AdminDashboard from '../views/admin/AdminDashboard.vue';
 import ManageClass from '../views/admin/ManageClass.vue';
 import TeacherDashboard from '../views/teacher/Dashboard.vue';  
+import ManageTeacher from '../views/admin/ManageTeacher.vue';
+import ManageStudent from '../views/admin/ManageStudent.vue';
  
 
 
@@ -19,6 +21,8 @@ const routes = [
   // Admin routes
   { path: '/admin', component: AdminDashboard, meta: { requiresRole: 'admin' } },
   { path: '/admin/manage-class', component: ManageClass, meta: { requiresRole: 'admin' } },
+  { path: '/admin/manage-teacher', component: ManageTeacher, meta: { requiresRole: 'admin' } },
+  { path: '/admin/manage-student', component: ManageStudent, meta: { requiresRole: 'admin' } },
 
   // Teacher routes
   { path: '/teacher', component: TeacherDashboard, meta: { requiresRole: 'teacher' } },
