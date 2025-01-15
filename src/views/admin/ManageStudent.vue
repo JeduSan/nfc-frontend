@@ -1,48 +1,69 @@
 <template>
-  <div class="manage-student">
+  <div class="page-wrapper">
     <AdminSidebar />
     <div class="page-content">
       <AdminHeader />
-      <div class="manage-body">
-        <div class="header">
-          <h1>Manage Student</h1>
-          <button class="add-student-btn">+ Add Student</button>
+      <div class="page-body">
+        <div class="page-header">
+          <h1>Manage Students</h1>
+          <button class="action-button" @click="goToRegisterStudent">+ Register Student</button>
         </div>
 
-        <section class="student-list">
-          <!-- Search and Filter -->
+        <section class="content-section">
+          
           <div class="controls">
             <div class="search-bar">
-              <input type="text" v-model="searchQuery" placeholder="Search Events" />
+              <input type="text" v-model="searchQuery" placeholder="Search Students" />
               <i class="fas fa-search"></i>
             </div>
+
+            
             <div class="filter">
-              <select v-model="selectedMonth">
-                <option value="">Filter by Month</option>
-                <option value="january">January</option>
-                <option value="february">February</option>
-                <!-- Add more months -->
+              <select v-model="selectedCourse" @change="filterStudents">
+                <option value="">All Courses</option>
+                <option v-for="course in courses" :key="course" :value="course">{{ course }}</option>
               </select>
             </div>
           </div>
 
           <!-- Table -->
-          <table class="class-table">
-            <thead>
-              <tr>
-                <th>Class Name</th>
-                <th>Teacher</th>
-                <th>Class List</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr v-for="(classItem, index) in filteredClasses" :key="index">
-                <td>{{ classItem.className }}</td>
-                <td>{{ classItem.teacher }}</td>
-                <td>{{ classItem.classList }}</td>
-              </tr>
-            </tbody>
-          </table>
+          <div class="table-wrapper">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Student ID</th>
+                  <th>First Name</th>
+                  <th>Last Name</th>
+                  <th>Middle Name</th>
+                  <th>Year</th>
+                  <th>Course</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr 
+                  v-for="(student, index) in filteredStudents" 
+                  :key="index"
+                  :class="{ 'row-light': index % 2 === 0, 'row-dark': index % 2 !== 0 }"
+                >
+                  <td>{{ student.studentId }}</td>
+                  <td>{{ student.firstName }}</td>
+                  <td>{{ student.lastName }}</td>
+                  <td>{{ student.middleName }}</td>
+                  <td>{{ student.year }}</td>
+                  <td>{{ student.course }}</td>
+                  <td>
+                    <button class="edit-button">
+                      <i class="fas fa-edit"></i>
+                    </button>
+                    <button class="delete-button">
+                      <i class="fas fa-trash-alt"></i>
+                    </button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
         </section>
       </div>
     </div>
@@ -50,194 +71,61 @@
 </template>
 
 <script>
-
 import AdminSidebar from "@/components/AdminSidebar.vue";
 import AdminHeader from "@/components/AdminHeader.vue";
+import '../../styles/table.css';
 
 export default {
   components: {
     AdminSidebar,
     AdminHeader,
   },
-
-  name: 'ManageStudent',
+  name: 'ManageStudents',
   data() {
     return {
       searchQuery: '',
-      selectedMonth: '',
-      classes: [
-        { className: 'Math 101', teacher: 'Mr. Smith', classList: '20 Students' },
-        { className: 'Science 202', teacher: 'Ms. Johnson', classList: '25 Students' },
-        { className: 'History 303', teacher: 'Dr. Brown', classList: '18 Students' },
-        { className: 'Art 404', teacher: 'Mrs. Davis', classList: '22 Students' },
-        { className: 'Music 505', teacher: 'Mr. Wilson', classList: '15 Students' },
+      selectedCourse: '',
+      students: [
+        { studentId: 'S001', firstName: 'John', lastName: 'Doe', middleName: 'A', year: '3', course: 'Mathematics', contact: '123-456-7890' },
+        { studentId: 'S002', firstName: 'Jane', lastName: 'Smith', middleName: 'B', year: '2', course: 'Biology', contact: '123-456-7891' },
+        { studentId: 'S003', firstName: 'Emily', lastName: 'Davis', middleName: 'C', year: '1', course: 'History', contact: '123-456-7892' },
+        { studentId: 'S004', firstName: 'Michael', lastName: 'Brown', middleName: 'D', year: '4', course: 'Literature', contact: '123-456-7893' },
+        { studentId: 'S005', firstName: 'Sarah', lastName: 'Wilson', middleName: 'E', year: '3', course: 'Music', contact: '123-456-7894' },
       ],
     };
   },
   computed: {
-    filteredClasses() {
-      return this.classes.filter((classItem) => {
-        const matchesSearch = classItem.className.toLowerCase().includes(this.searchQuery.toLowerCase());
-        const matchesMonth = this.selectedMonth === '' || classItem.className.toLowerCase().includes(this.selectedMonth.toLowerCase());
-        return matchesSearch && matchesMonth;
-      });
+    courses() {
+      return [...new Set(this.students.map(student => student.course))];
     },
+    filteredStudents() {
+      let filteredStudents = this.students;
+
+      if (this.searchQuery) {
+        filteredStudents = filteredStudents.filter((student) => {
+          return student.firstName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                 student.lastName.toLowerCase().includes(this.searchQuery.toLowerCase()) ||
+                 student.middleName.toLowerCase().includes(this.searchQuery.toLowerCase());
+        });
+      }
+
+      if (this.selectedCourse) {
+        filteredStudents = filteredStudents.filter((student) => {
+          return student.course === this.selectedCourse;
+        });
+      }
+
+      return filteredStudents;
+    },
+  },
+  methods: {
+    goToRegisterStudent() {
+  this.$router.push('/admin/register-student');
+},
+
   },
 };
 </script>
-
 <style scoped>
-.manage-student {
-  display: flex;
-}
 
-.manage-body {
-  padding: 0px;
-}
-
-.page-content {
-  margin-left: 200px;
-  width: calc(100% - 200px);
-  display: flex;
-  flex-direction: column;
-}
-
-.header {
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffff;
-  padding: 20px 20px;
-  margin: 5px 18px;
-  border-radius: 15px;
-  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.3);
-}
-
-.header h1 {
-  margin: 0;
-  font-size: 23px;
-  background: #d02e1c;
-  background: linear-gradient(to bottom, #d02e1c 23%, #791e1e 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-
-.add-student-btn {
-  background: linear-gradient(180deg, rgba(208, 46, 28, 1) 0%, rgba(121, 30, 30, 1) 100%);
-  color: #fff;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  border-radius: 15px;
-}
-
-.student-list {
-
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #ffff;
-  padding: 20px 20px;
-  margin: 20px 18px;
-  border-radius: 15px;
-  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.3);
-  flex-direction: column;
-}
-
-.controls {
-  display: flex;
-  flex-direction: row;
-  width: 100%;
-  justify-content: space-around;
-  margin-bottom: 15px;
-  gap: 20px;
-}
-
-.controls .search-bar {
-  flex: 1;
-}
-
-.search-bar {
-  position: relative;
-  width: 100%;
-}
-
-.search-bar input {
-  padding: 10px;
-  width: 100%;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.3);
-}
-
-.search-bar input[type="text"] {
-  width: 100%;
-  /* Ensure the input takes full width */
-  padding-left: 35px;
-  /* Add padding to the left to make space for the icon */
-  padding-right: 10px;
-  /* Optional: Add padding to the right */
-  box-sizing: border-box;
-  /* Ensure padding is included in the width */
-}
-
-.search-bar i {
-  position: absolute;
-  top: 48%;
-  left: 13px;
-  /* Position the icon inside the input field */
-  transform: translateY(-50%);
-  font-size: 16px;
-  color: maroon;
-  pointer-events: none;
-  /* Ensure the icon doesn't interfere with input clicks */
-}
-
-.filter select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 15px;
-  box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.3);
-  color: rgb(117, 117, 117);
-}
-
-.class-table {
-  width: 100%;
-  border-collapse: collapse;
-  background-color: #fff;
-}
-
-.class-table thead {
-  background: linear-gradient(180deg, rgba(208, 46, 28, 1) 0%, rgba(121, 30, 30, 1) 100%);
-  box-shadow: 0;
-}
-
-
-.class-table thead tr:first-child th:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-.class-table thead tr:first-child th {
-  border-bottom: 0px solid #ccc;
-}
-
-.class-table thead tr:first-child th:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-}
-
-.class-table th,
-.class-table td {
-  padding: 15px;
-  text-align: left;
-  border-bottom: 1px solid #ccc;
-}
-
-.class-table th {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  color: #fff;
-}
 </style>
