@@ -10,7 +10,6 @@ import ManageStudent from '../views/admin/ManageStudent.vue';
 
 import ManageEvents from '../views/admin/ManageEvents.vue';
 import Analytics from '../views/admin/Analytics.vue';
- 
 
 
 import RegisterStudent from '../views/admin/RegisterStudent.vue';  // Import RegisterStudent.vue
@@ -30,6 +29,7 @@ const routes = [
 
   { path: '/admin/manage-events', component: ManageEvents, meta: { requiresRole: 'admin' } },
   { path: '/admin/analytics', component: Analytics, meta: { requiresRole: 'admin' } },
+  { path: '/admin/register-student', component: RegisterStudent, meta: { requiresRole: 'admin' } },
 
   
   // Register Student route
