@@ -12,7 +12,7 @@ import ManageEvents from '../views/admin/ManageEvents.vue';
 import Analytics from '../views/admin/Analytics.vue';
 
 
-import RegisterStudent from '../views/admin/RegisterStudent.vue';  // Import RegisterStudent.vue
+import RegisterStudent from '../views/admin/RegisterStudent.vue';  
 
 
 const routes = [
