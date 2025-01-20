@@ -7,6 +7,7 @@ import ManageClass from '../views/admin/ManageClass.vue';
 import TeacherDashboard from '../views/teacher/Dashboard.vue';
 import ManageTeacher from '../views/admin/ManageTeacher.vue';
 import ManageStudent from '../views/admin/ManageStudent.vue';
+import ClassList from '../views/admin/ClassList.vue';
 
 import ManageEvents from '../views/admin/ManageEvents.vue';
 import Analytics from '../views/admin/Analytics.vue';
@@ -33,7 +34,8 @@ const routes = [
 
   
   // Register Student route
-  { path: '/admin/register-student', component: RegisterStudent, meta: { requiresRole: 'admin' } },  // Added route
+  { path: '/admin/register-student', component: RegisterStudent, meta: { requiresRole: 'admin' } }, 
+  { path: '/admin/class-list', component: ClassList, meta: { requiresRole: 'admin' } }, 
 
 
   // Teacher routes

@@ -86,7 +86,7 @@ export default {
     };
   },
   computed: {
-    // Get a list of all unique departments for the filter dropdown
+    
     departments() {
       return [...new Set(this.teachers.map(teacher => teacher.department))];
     },
@@ -110,7 +110,7 @@ export default {
   },
   methods: {
     filterTeachers() {
-      // Triggered when the filter changes
+     
     },
   },
 };

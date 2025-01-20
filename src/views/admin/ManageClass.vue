@@ -44,7 +44,9 @@
               >
                 <td>{{ classItem.className }}</td>
                 <td>{{ classItem.teacher }}</td>
-                <td><button class="view-button">View Class List</button></td>
+                <td>
+                  <button class="view-button" @click="viewClassList(classItem)">View Class List</button>
+                </td>
                 <td>
                   <button class="edit-button">
                     <i class="fas fa-edit"></i>
@@ -61,6 +63,7 @@
     </div>
   </div>
 </template>
+
 <script>
 import AdminSidebar from "@/components/AdminSidebar.vue";
 import AdminHeader from "@/components/AdminHeader.vue";
@@ -112,9 +115,14 @@ export default {
     filterClasses() {
       // Triggered when the filter changes
     },
+    viewClassList(classItem) {
+      // Use Vue Router to navigate to the class list page
+      this.$router.push(`/admin/class-list`);
+    },
   },
 };
 </script>
-<style scoped>
 
+<style scoped>
+/* You can add your custom styles here */
 </style>
