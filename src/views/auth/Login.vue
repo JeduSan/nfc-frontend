@@ -1,5 +1,5 @@
 <template>
-  <div style="background: linear-gradient(to top, #7f1d1d, #b91c1c, #b91c1c); min-height: 100vh; background-attachment: fixed; background-size: cover;">
+  <div class="background_container">
     <div class="background">
       <!-- SVG Background -->
 
@@ -66,6 +66,13 @@ export default {
 </script>
 
 <style scoped>
+.background_container {
+  background: linear-gradient(to top, #7f1d1d, #b91c1c, #b91c1c);
+  min-height: 100vh;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
 .background {
   height: 80ch;
   width: 100%;
