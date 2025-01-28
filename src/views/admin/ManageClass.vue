@@ -33,6 +33,7 @@
                 <th>Class Name</th>
                 <th>Teacher</th>
                 <th>Class List</th>
+                <th>Class Schedule</th>
                 <th>Actions</th>
               </tr>
             </thead>
@@ -46,6 +47,9 @@
                 <td>{{ classItem.teacher }}</td>
                 <td>
                   <button class="view-button" @click="viewClassList(classItem)">View Class List</button>
+                </td>
+                <td>
+                  <button class="view-button" @click="viewClassSchedule(classItem)">View Class Schedule</button>
                 </td>
                 <td>
                   <button class="edit-button">
@@ -80,16 +84,15 @@ export default {
       searchQuery: '',
       selectedTeacher: '',  // Model for the filter
       classes: [
-        { className: 'Math 101', teacher: 'Mr. Smith' },
-        { className: 'Science 202', teacher: 'Ms. Johnson' },
-        { className: 'History 303', teacher: 'Dr. Brown' },
-        { className: 'Art 404', teacher: 'Mrs. Davis' },
-        { className: 'Music 505', teacher: 'Mr. Wilson' },
+        { className: 'Math 101', teacher: 'Mr. Smith', schedule: 'Mon, Wed, Fri 10:00-11:30' },
+        { className: 'Science 202', teacher: 'Ms. Johnson', schedule: 'Tue, Thu 1:00-2:30' },
+        { className: 'History 303', teacher: 'Dr. Brown', schedule: 'Mon, Wed 9:00-10:30' },
+        { className: 'Art 404', teacher: 'Mrs. Davis', schedule: 'Tue, Thu 3:00-4:30' },
+        { className: 'Music 505', teacher: 'Mr. Wilson', schedule: 'Fri 12:00-2:00' },
       ],
     };
   },
   computed: {
-    // Get a list of all teachers for the filter dropdown
     teachers() {
       return [...new Set(this.classes.map(classItem => classItem.teacher))];
     },
@@ -116,13 +119,15 @@ export default {
       // Triggered when the filter changes
     },
     viewClassList(classItem) {
-      // Use Vue Router to navigate to the class list page
       this.$router.push(`/admin/class-list`);
+    },
+    viewClassSchedule(classItem) {
+      // Navigate to the class schedule page
+      this.$router.push(`/admin/class-schedule`);
     },
   },
 };
 </script>
 
 <style scoped>
-/* You can add your custom styles here */
 </style>

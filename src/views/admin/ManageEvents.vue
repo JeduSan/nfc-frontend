@@ -62,7 +62,9 @@
                   </td>
                   <td>
                     <span v-if="event.status === 'Happening Now' || event.status === 'Ended'" class="view-button">
-                      <button class="viewattendance-button"><i class="fas fa-eye"></i> View Attendance</button>
+                      <button class="viewattendance-button" @click="viewAttendance(event.id)">
+                        <i class="fas fa-eye"></i> View Attendance
+                      </button>
                     </span>
                     <span v-else>-- --</span>
                   </td>
@@ -85,6 +87,7 @@
 </template>
 
 <script>
+import { useRouter } from 'vue-router';  // Importing the useRouter hook
 import AdminSidebar from "@/components/AdminSidebar.vue";
 import AdminHeader from "@/components/AdminHeader.vue";
 import '../../styles/table.css';
@@ -130,9 +133,14 @@ export default {
     filterEvents() {
       // Triggered when the filter changes
     },
+    viewAttendance(eventId) {
+      // Navigate to the attendance list page, passing the eventId as a parameter (if needed)
+      this.$router.push({ path: '/admin/attendance-list', query: { eventId } });
+    },
   },
 };
 </script>
+
 
 <style scoped>
 

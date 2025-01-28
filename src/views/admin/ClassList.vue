@@ -16,7 +16,6 @@
           </div>
   
           <section class="content-section">
-            <!-- Controls Section with Search -->
             <div class="controls">
               <div class="search-bar">
                 <input type="text" v-model="searchQuery" placeholder="Search Name" />
@@ -24,7 +23,6 @@
               </div>
             </div>
   
-            <!-- Table with Students List -->
             <table class="data-table">
               <thead>
                 <tr>
@@ -94,7 +92,7 @@
     },
     methods: {
       removeStudent(index) {
-        // Remove the student from the array
+   
         this.students.splice(index, 1);
       },
     },

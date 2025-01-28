@@ -22,6 +22,14 @@
         <h3>Events Absent</h3>
         <p>1</p>
       </div>
+      <div class="stats-card white-card">
+        <h3>Class Days Present</h3>
+        <p>12</p>
+      </div>
+      <div class="stats-card white-card">
+        <h3>Class Days Absent</h3>
+        <p>3</p>
+      </div>
     </section>
 
     <!-- Recent Events Section -->
@@ -33,8 +41,6 @@
           v-for="(event, index) in recentEvents"
           :key="index"
         >
-
-        
           <div class="event-date">
             <p class="month">{{ event.date.month }}</p>
             <p class="day">{{ event.date.day }}</p>
@@ -94,7 +100,6 @@
     </section>
   </div>
 </template>
-
 <script>
 import profileImage from "@/assets/sample-profile.jpg";
 
@@ -166,6 +171,7 @@ export default {
   },
 };
 </script>
+
 
 <style scoped>
 .dashboard {
@@ -240,6 +246,8 @@ export default {
   background: linear-gradient(180deg, rgba(208, 46, 28, 1) 0%, rgba(121, 30, 30, 1) 100%);
   border-radius: 20px;
   color: white;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for better visual effect */
+
 }
 
 .stats-card h3 {
@@ -253,6 +261,15 @@ export default {
   float: right;
   font-weight: bold;
 }
+
+.white-card {
+  background: linear-gradient(180deg, rgb(255, 254, 254) 0%, rgb(238, 238, 238) 100%) !important;
+  color: #D02E1C;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow for better visual effect */
+
+ 
+}
+
 
 .events-section {
   display: flex;
@@ -464,4 +481,18 @@ export default {
 .event-status.missed {
   color: orange;
 }
+
+@media (max-width: 768px) {
+  .stats-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); 
+    gap: 10px;
+  }
+
+  .stats-card, .white-card {
+    order: initial;
+  }
+}
+
+
 </style>

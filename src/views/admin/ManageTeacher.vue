@@ -75,7 +75,7 @@ export default {
   data() {
     return {
       searchQuery: '',
-      selectedDepartment: '',  // Model for the filter by department
+      selectedDepartment: '', 
       teachers: [
         { name: 'Mr. Smith', department: 'Math', contact: '123-456-7890' },
         { name: 'Ms. Johnson', department: 'Science', contact: '123-456-7891' },

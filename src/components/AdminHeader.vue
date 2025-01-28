@@ -30,7 +30,6 @@
         this.dropdownVisible = !this.dropdownVisible;
       },
       goToProfile() {
-        // Redirect to the profile page or perform another action
         this.$router.push("/profile");
       },
       logout() {
