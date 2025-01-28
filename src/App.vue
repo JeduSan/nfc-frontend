@@ -20,11 +20,11 @@ export default {
     // Check the current route to Hide Header and BottomNavbar on '/admin' and '/teacher'  routes 
     showHeader() {
      
-      return !this.$route.path.includes('/admin') && !this.$route.path.includes('/teacher');
+      return !this.$route.path.includes('/admin') && !this.$route.path.includes('/teacher') && !this.$route.path.includes('/login');
     },
     showBottomNavbar() {
     
-      return !this.$route.path.includes('/admin') && !this.$route.path.includes('/teacher');
+      return !this.$route.path.includes('/admin') && !this.$route.path.includes('/teacher') && !this.$route.path.includes('/login');
     }
   }
 }

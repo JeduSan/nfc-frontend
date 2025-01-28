@@ -1,4 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router';
+
+import Login from '../views/auth/Login.vue';
+
 import Dashboard from '../views/student/Dashboard.vue';
 import Profile from '../views/student/Profile.vue';
 import AttendanceMonitoring from '../views/student/AttendanceMonitoring.vue';
@@ -19,6 +22,10 @@ import TeacherClassSchedule from '../views/teacher/TeacherClassSchedule.vue';  /
 
 
 const routes = [
+
+  // Auth routes
+  { path: '/login', component: Login },
+
   // Student routes
   { path: '/', component: Dashboard },
   { path: '/profile', component: Profile },
