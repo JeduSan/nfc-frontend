@@ -104,6 +104,7 @@ export default {
   max-width: 42rem;
   /* Equivalent to max-w-2xl in Tailwind (2xl is 42rem) */
   border-radius: 0.5rem;
+  background: none;
   /* Equivalent to rounded-lg (lg is 0.5rem) */
 }
 
