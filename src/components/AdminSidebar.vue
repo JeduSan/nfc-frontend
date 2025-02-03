@@ -59,7 +59,7 @@ export default {
   margin: 15px 10px;
   border-radius: 20px;
   transition: width 0.3s;
-  z-index: 1000; /* Ensure the sidebar stays above other elements */
+  /* z-index: 1000; Ensure the sidebar stays above other elements */
   overflow-y: auto; /* Allow the sidebar to scroll if the content exceeds the height */
 }
 
