@@ -6,7 +6,7 @@
       <div class="page-body">
         <div class="page-header">
           <h1>Manage Class</h1>
-          <button @click="openModal" class="action-button">+ Add Class</button>
+          <button @click="openModal('add')" class="action-button">+ Add Class</button>
         </div>
         <section class="content-section">
           <!-- Controls Section with Search and Filter -->
@@ -48,10 +48,10 @@
                   <button class="view-button" @click="viewClassSchedule(classItem)">View Class Schedule</button>
                 </td>
                 <td>
-                  <button class="edit-button">
+                  <button @click="openModal('edit')" class="edit-button">
                     <i class="fas fa-edit"></i>
                   </button>
-                  <button class="delete-button">
+                  <button @click="openModal('delete')" class="delete-button">
                     <i class="fas fa-trash-alt"></i>
                   </button>
                 </td>
@@ -71,19 +71,50 @@
         <div class="close-button-container">
           <button @click="closeModal" class="fa-regular fa-circle-xmark modal-close-button "></button>
         </div>
-        <h2 class="modal-title">Add Class</h2>
-        <div class="modal-form-container">
-          <div class="form-input">
-            <input id="SampleID1" type="text" placeholder="Sample Label Template 1" />
+
+        <!-- Add Class Form -->
+        <div v-if="modalType === 'add'">
+          <h2 class="modal-title">Add Class</h2>
+          <div class="modal-form-container">
+            <div class="form-input">
+              <input id="SampleID1" type="text" placeholder="Sample Label Template 1" />
+            </div>
+            <div class="form-input">
+              <input id="SampleID2" type="text" placeholder="Sample Label Template 2" />
+            </div>
+            <div class="form-input">
+              <input id="SampleID3" type="text" placeholder="Sample Label Template 3" />
+            </div>
           </div>
-          <div class="form-input">
-            <input id="SampleID2" type="text" placeholder="Sample Label Template 2" />
+          <button class="modal-submit-button">ADD</button>
+        </div>
+
+        <!-- edit Class details -->
+        <div v-if="modalType === 'edit'">
+          <h2 class="modal-title">Edit Class</h2>
+          <div class="modal-form-container">
+            <div class="form-input">
+              <input id="SampleID1" type="text" placeholder="Sample Label Template 1" />
+            </div>
+            <div class="form-input">
+              <input id="SampleID2" type="text" placeholder="Sample Label Template 2" />
+            </div>
+            <div class="form-input">
+              <input id="SampleID3" type="text" placeholder="Sample Label Template 3" />
+            </div>
           </div>
-          <div class="form-input">
-            <input id="SampleID3" type="text" placeholder="Sample Label Template 3" />
+          <button class="modal-submit-button">SAVE</button>
+        </div>
+
+        <!-- Delete Class -->
+        <div v-if="modalType === 'delete'">
+          <h2 class="modal-title">Delete Class</h2>
+          <div style="justify-content: right; display: flex; column-gap: 20px;">
+            <button class="modal-submit-button">CONFIRM</button>
+            <button class="modal-cancel-button">CANCEL</button>
           </div>
         </div>
-        <button class="modal-submit-button">ADD</button>
+
       </div>
     </div>
   </div>
@@ -105,6 +136,7 @@ export default {
   data() {
     return {
       isOpen: false, //for modal
+      modalType: '',
       searchQuery: '',
       selectedTeacher: '',  // Model for the filter
       classes: [
@@ -139,7 +171,8 @@ export default {
     },
   },
   methods: {
-    openModal() {
+    openModal(type) {
+      this.modalType = type;
       this.isOpen = true; //for modal
     },
     closeModal() {
@@ -236,6 +269,15 @@ export default {
 }
 
 .modal-submit-button {
+  background: linear-gradient(180deg, rgba(208, 46, 28, 1) 0%, rgba(121, 30, 30, 1) 100%);
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 10px;
+}
+
+.modal-cancel-button {
   background: linear-gradient(180deg, rgba(208, 46, 28, 1) 0%, rgba(121, 30, 30, 1) 100%);
   color: #fff;
   border: none;
